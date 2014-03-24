@@ -1,0 +1,239 @@
+
+<script type="text/javascript">
+$(function () {
+    var chart;
+    // Radialize the colors
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+        return {
+            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+			credits: {
+	 		  enabled: false
+			},
+            chart: {
+                renderTo: 'activeIssPie',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Active Issues'
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.y,0) +' <%=t :issues_label%>';
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage,2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                data: <%=@active_iss_stat_summary.map{ |stat| [stat.name.to_s, stat.stat_total.to_i]}.inspect.html_safe%>
+            }]
+        });
+    });
+    
+});
+
+</script>
+<script type="text/javascript">
+var chart;
+$(document).ready(function() {
+    chart = new Highcharts.Chart({
+        credits: {
+          enabled: false
+        },      
+        chart: {
+            renderTo: 'activeIssColumn',
+            type: 'column'
+        },
+        title: {
+            text: 'Active Issues by Status'
+        },
+        xAxis: {
+            categories: <%=@active_iss_stat_summary.map{ |stat| stat.name.to_s}.inspect.html_safe%>,
+            labels: {enabled: false}
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '<%=t :issues_label%> ',
+            }
+        },
+        legend: {
+            enabled: true
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    '<%=t :tasks_label%> '+ Highcharts.numberFormat(this.y, 0);
+            }
+        },
+        series: [
+                <%@active_iss_stat_summary.each do |stat|%>
+                {
+                        name: <%=stat.name.inspect.html_safe%>,
+                        data: [<%=stat.stat_total.to_i%>],
+                        cursor: 'pointer',
+                        events: {
+                                // Default action for (left) clicking the data
+                                click: function(point) {
+                                        window.open('../issues?utf8=✓&set_filter=1&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=<%=stat.id%>&f%5B%5D=&c%5B%5D=project&c%5B%5D=tracker&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=subject&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=updated_on&group_by=');
+                                }
+                        },
+                   dataLabels: {
+                                                        enabled: true,
+                                                        rotation: -90,
+                                                        color: '#FFFFFF',
+                                                        align: 'right',
+                                                        x: -3,
+                                                        y: 10,
+                                                        formatter: function() {
+                                                                return this.y;
+                                                        },
+                                                        style: {
+                                                                font: 'normal 13px Verdana, sans-serif'
+                                                        }
+                                                }
+                  }<%if !(@active_iss_stat_summary.last == stat)%>,<%end%>
+                 <%end%>
+                ]
+    });
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            credits: {
+              enabled: false
+            },
+            chart: {
+                renderTo: 'allIssPie',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'All Issues'
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.y,0) +' <%=t :issues_label%>';
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage,2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                data: <%=@all_iss_stat_summary.map{ |stat| [stat.name.to_s, stat.stat_total.to_i]}.inspect.html_safe%>
+            }]
+        });
+    });
+    
+});
+
+</script>
+<script type="text/javascript">
+var chart;
+$(document).ready(function() {
+    chart = new Highcharts.Chart({
+        credits: {
+          enabled: false
+        },      
+        chart: {
+            renderTo: 'allIssColumn',
+            type: 'column'
+        },
+        title: {
+            text: 'All Issues by Status'
+        },
+        xAxis: {
+            categories: <%=@all_iss_stat_summary.map{ |stat| stat.name.to_s}.inspect.html_safe%>,
+            labels: {enabled: false}
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '<%=t :issues_label%> ',
+            }
+        },
+        legend: {
+            enabled: true
+        },
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    '<%=t :tasks_label%> '+ Highcharts.numberFormat(this.y, 0);
+            }
+        },
+        series: [
+                <%@all_iss_stat_summary.each do |stat|%>
+                {
+                        name: <%=stat.name.inspect.html_safe%>,
+                        data: [<%=stat.stat_total.to_i%>],
+                        cursor: 'pointer',
+                        events: {
+                                // Default action for (left) clicking the data
+                                click: function(point) {
+                                        window.open('../issues?utf8=✓&set_filter=1&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=<%=stat.id%>&f%5B%5D=&c%5B%5D=project&c%5B%5D=tracker&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=subject&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=updated_on&group_by=');
+                                }
+                        },
+                   dataLabels: {
+                                                        enabled: true,
+                                                        rotation: -90,
+                                                        color: '#FFFFFF',
+                                                        align: 'right',
+                                                        x: -3,
+                                                        y: 10,
+                                                        formatter: function() {
+                                                                return this.y;
+                                                        },
+                                                        style: {
+                                                                font: 'normal 13px Verdana, sans-serif'
+                                                        }
+                                                }
+                  }<%if !(@all_iss_stat_summary.last == stat)%>,<%end%>
+                 <%end%>
+                ]
+    });
+});
+</script>
+
+

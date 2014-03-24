@@ -1,0 +1,67 @@
+<script type="text/javascript">
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            credits: {
+              enabled: false
+            },      
+            chart: {
+                renderTo: 'containerActivityByWeek',
+            },
+            title: {
+                text: '<b>DSR Weekly Activity</b>',
+                x: 0 //center
+            },
+            xAxis: {
+              categories: <%= @weeks %>,
+              title: {
+                  text: "Week #"
+              },
+              labels: {
+                rotation: -45,
+                align: 'right',
+                style: {
+                  font: 'normal 10px Verdana, sans-serif'
+                }
+              }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '<%=t :issues_label%> '
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>Week: '+ this.x +'</b><br/>'+
+                        this.series.name +': '+ this.y +'<br/>'
+                        //'Total: '+ this.point.stackTotal;
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Created',
+                color: Highcharts.Color('#89A54E').brighten(-0.05).get('rgb'),
+                data: <%= @created_issues %>
+            }, {
+                name: 'Closed',
+                color: Highcharts.Color('#AA4643').brighten(-0.05).get('rgb'),
+                data: <%= @closed_issues %>
+            }]
+        });
+    });
+});
+</script>
+
+

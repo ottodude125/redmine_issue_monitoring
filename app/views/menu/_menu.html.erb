@@ -1,0 +1,14 @@
+<nav id="menu">
+    <ul>
+        <li><%= link_to "By Week and Age", { :controller => 'history_by_tracker', :action => 'index' }, :class => ("history_by_tracker" == params[:controller] ? "menu_selected" : "")  %></li>        
+
+        <li><%= link_to "Activity by Week", { :controller => 'activity_by_week', :action => 'index' }, :class => ("activity_by_week" == params[:controller] ? "menu_selected" : "")  %></li>
+
+        <li><%= link_to "Issues", { :controller => 'issue_monitor', :action => 'index' }, :class => ("issue_monitor" == params[:controller] ? "menu_selected" : "")   %></li>
+
+        <li><%= link_to "Active By User", { :controller => 'active_by_user', :action => 'index' }, :class => ("active_by_user" == params[:controller] ? "menu_selected" : "")   %></li>
+        
+        
+    </ul>
+</nav>
+

@@ -1,0 +1,25 @@
+= render :partial => '/menu/contentHeader'
+= render :partial => 'index'
+= render :partial => 'menu/menu'
+
+
+
+%div.central_charts
+  %h2
+    = "Summary"
+  %div#containerOpenWeekAge.central_chart
+
+%div.central_charts
+  %h2
+    = "Bugs"
+  %div#containerOpenBugWeekAge.central_chart
+
+%div.central_charts
+  %h2
+    = "Support"
+  %div#containerOpenSupportWeekAge.central_chart
+
+%div.central_charts
+  %h2
+    = "Features"
+  %div#containerOpenFeatureWeekAge.central_chart

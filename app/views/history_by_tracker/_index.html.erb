@@ -1,0 +1,438 @@
+<script type="text/javascript">
+$(function () {
+  var chart;
+  $(document).ready(function() {
+    chart = new Highcharts.Chart({
+      chart: {
+        renderTo: 'containerOpenWeekAge',
+        type: 'column'
+      },
+      title: {
+        text: 'Open DSR\'s by Week and Age'
+      },
+      scrollbar:{
+              enabled: false
+          },
+        credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: <%= @weeks %>,
+        title: {
+            text: "Week #"
+        },
+        labels: {
+          rotation: -45,
+          align: 'right',
+          style: {
+            font: 'normal 10px Verdana, sans-serif'
+          }
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: '<%=t :issues_label%> '
+        }
+      },
+      legend: {
+        enabled: true,
+      },
+      tooltip: {
+          formatter: function() {
+              return '<b>Week: '+ this.x +'</b><br/>'+
+                  this.series.name +': '+ this.y +'<br/>'+
+                  'Total: '+ this.point.stackTotal;
+          }
+      },
+      plotOptions: {
+          column: {
+              stacking: 'normal',
+              pointPadding: 0,
+              groupPadding: 0
+          }
+      },
+      series: [{
+          name: '0-4 Weeks Old',
+          //color: '#89A54E',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#89A54E'],
+                  [1, Highcharts.Color('#89A54E').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_issues0004 %>
+      }, {
+          name: '5-26 Weeks Old',
+          //color: '#3D96AE',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#3D96AE'],
+                  [1, Highcharts.Color('#3D96AE').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_issues0526 %>
+      }, {
+          name: '27-52 Weeks Old',
+          //color: '#DB843D',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#DB843D'],
+                  [1, Highcharts.Color('#DB843D').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_issues2752 %>
+      }, {
+          name: '> 52 Weeks Old',
+          //color: '#AA4643',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#AA4643'],
+                  [1, Highcharts.Color('#AA4643').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_issues53xx %>
+      }]
+    });
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(function () {
+  var chart;
+
+  $(document).ready(function() {
+    chart = new Highcharts.Chart({
+      chart: {
+        renderTo: 'containerOpenBugWeekAge',
+        type: 'column'
+      },
+      title: {
+        text: 'Open Bug DSR\'s by Week and Age'
+      },
+      scrollbar:{
+              enabled: false
+          },
+        credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: <%= @weeks %>,
+        title: {
+            text: "Week #"
+        },
+        labels: {
+          rotation: -45,
+          align: 'right',
+          style: {
+            font: 'normal 10px Verdana, sans-serif'
+          }
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: '<%=t :issues_label%> '
+        }
+      },
+      legend: {
+        enabled: true,
+      },
+      tooltip: {
+          formatter: function() {
+              return '<b>Week: '+ this.x +'</b><br/>'+
+                  this.series.name +': '+ this.y +'<br/>'+
+                  'Total: '+ this.point.stackTotal;
+          }
+      },
+      plotOptions: {
+          column: {
+              stacking: 'normal',
+              pointPadding: 0,
+              groupPadding: 0
+          }
+      },
+      series: [{
+          name: '0-4 Weeks Old',
+          //color: '#89A54E',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#89A54E'],
+                  [1, Highcharts.Color('#89A54E').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_bugs0004 %>
+      }, {
+          name: '5-26 Weeks Old',
+          //color: '#3D96AE',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#3D96AE'],
+                  [1, Highcharts.Color('#3D96AE').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_bugs0526 %>
+      }, {
+          name: '27-52 Weeks Old',
+          //color: '#DB843D',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#DB843D'],
+                  [1, Highcharts.Color('#DB843D').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_bugs2752 %>
+      }, {
+          name: '> 52 Weeks Old',
+          //color: '#AA4643',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#AA4643'],
+                  [1, Highcharts.Color('#AA4643').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_bugs53xx %>
+      }, {
+          name: 'Goal',
+          type: 'spline',
+          marker: {
+            symbol: 'triangle',
+            lineWidth: 1,
+            lineColor: Highcharts.getOptions().colors[3],
+            //fillColor: 'white'
+          },
+          data: <%= Array.new(54,15) %>
+      }]
+    });
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(function () {
+  var chart;
+
+  $(document).ready(function() {
+    chart = new Highcharts.Chart({
+      chart: {
+        renderTo: 'containerOpenSupportWeekAge',
+        type: 'column'
+      },
+      title: {
+        text: 'Open Support DSR\'s by Week and Age'
+      },
+      scrollbar:{
+              enabled: false
+          },
+        credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: <%= @weeks %>,
+        title: {
+            text: "Week #"
+        },
+        labels: {
+          rotation: -45,
+          align: 'right',
+          style: {
+            font: 'normal 10px Verdana, sans-serif'
+          }
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: '<%=t :issues_label%> '
+        }
+      },
+      legend: {
+        enabled: true,
+      },
+      tooltip: {
+          formatter: function() {
+              return '<b>Week: '+ this.x +'</b><br/>'+
+                  this.series.name +': '+ this.y +'<br/>'+
+                  'Total: '+ this.point.stackTotal;
+          }
+      },
+      plotOptions: {
+          column: {
+              stacking: 'normal',
+              pointPadding: 0,
+              groupPadding: 0
+          }
+      },
+      series: [{
+          name: '0-4 Weeks Old',
+          //color: '#89A54E',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#89A54E'],
+                  [1, Highcharts.Color('#89A54E').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_supports0004 %>
+      }, {
+          name: '5-26 Weeks Old',
+          //color: '#3D96AE',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#3D96AE'],
+                  [1, Highcharts.Color('#3D96AE').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_supports0526 %>
+      }, {
+          name: '27-52 Weeks Old',
+          //color: '#DB843D',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#DB843D'],
+                  [1, Highcharts.Color('#DB843D').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_supports2752 %>
+      }, {
+          name: '> 52 Weeks Old',
+          //color: '#AA4643',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#AA4643'],
+                  [1, Highcharts.Color('#AA4643').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_supports53xx %>
+      }, {
+          name: 'Goal',
+          type: 'spline',
+          marker: {
+            symbol: 'triangle',
+            lineWidth: 1,
+            lineColor: Highcharts.getOptions().colors[3],
+            //fillColor: 'white'
+          },
+          data: <%= Array.new(54,10) %>
+      }]
+    });
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(function () {
+  var chart;
+
+  $(document).ready(function() {
+    chart = new Highcharts.Chart({
+      chart: {
+        renderTo: 'containerOpenFeatureWeekAge',
+        type: 'column'
+      },
+      title: {
+        text: 'Open Feature DSR\'s by Week and Age'
+      },
+      scrollbar:{
+              enabled: false
+          },
+        credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: <%= @weeks %>,
+        title: {
+            text: "Week #"
+        },
+        labels: {
+          rotation: -45,
+          align: 'right',
+          style: {
+            font: 'normal 10px Verdana, sans-serif'
+          }
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: '<%=t :issues_label%> '
+        }
+      },
+      legend: {
+        enabled: true,
+      },
+      tooltip: {
+          formatter: function() {
+              return '<b>Week: '+ this.x +'</b><br/>'+
+                  this.series.name +': '+ this.y +'<br/>'+
+                  'Total: '+ this.point.stackTotal;
+          }
+      },
+      plotOptions: {
+          column: {
+              stacking: 'normal',
+              pointPadding: 0,
+              groupPadding: 0
+          }
+      },
+      series: [{
+          name: '0-4 Weeks Old',
+          //color: '#89A54E',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#89A54E'],
+                  [1, Highcharts.Color('#89A54E').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_features0004 %>
+      }, {
+          name: '5-26 Weeks Old',
+          //color: '#3D96AE',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#3D96AE'],
+                  [1, Highcharts.Color('#3D96AE').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_features0526 %>
+      }, {
+          name: '27-52 Weeks Old',
+          //color: '#DB843D',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#DB843D'],
+                  [1, Highcharts.Color('#DB843D').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_features2752 %>
+      }, {
+          name: '> 52 Weeks Old',
+          //color: '#AA4643',
+          color: {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+                  [0, '#AA4643'],
+                  [1, Highcharts.Color('#AA4643').brighten(-0.3).get('rgb')] // darken
+              ]
+          },
+          data: <%= @open_features53xx %>
+      }]
+    });
+  });
+});
+</script>

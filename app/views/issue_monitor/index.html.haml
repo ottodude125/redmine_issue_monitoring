@@ -1,0 +1,29 @@
+= render :partial => '/menu/contentHeader'
+= render :partial => 'index'
+= render :partial => 'menu/menu'
+
+
+%div.central_charts
+	%h2
+		= t :active_iss_by_stat_label
+		\- #{@total_active_issues.to_s}#{t :issues_label}
+	
+	%div#activeIssPie.double_chart
+	%div#activeIssColumn.double_chart
+
+%div.double_charts
+	%h2
+		= t :all_iss_by_stat_label
+		\- #{@total_issues.to_s}#{t :issues_label}
+	
+	%div#allIssPie.double_chart
+	%div#allIssColumn.double_chart
+
+
+	
+-#%div.double_charts
+-#	%h2
+-#		= t :weekly_activity_label
+-#	%div.double_chart
+-#	%div#weeklyActivity
+

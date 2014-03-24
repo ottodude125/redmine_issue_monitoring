@@ -1,0 +1,5 @@
+en:
+    active_iss_by_stat_label: "Active Issues by Statuses "
+    all_iss_by_stat_label: "All Issues by Statuses "
+    issues_label: " issue(s)"
+    weekly_activity_label: "Weekly Activity"
