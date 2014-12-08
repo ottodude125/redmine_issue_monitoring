@@ -5,8 +5,74 @@
 
 %div.double_charts
   %h2
-    = "Active DSR Resolutions by User"
+    = "Active Issues by User"
   
   %div#userIssPie.double_chart
   %div#userIssColumn.double_chart
-        
+
+
+%div.double_charts
+  %h2
+    = "Active Issue Resolutions by User"       
+  - rowspan = 1
+  - rownum = 0
+  - cellcount = 0
+  - user = 0
+  - login = "nil"
+  %table#active_issues_by_user
+    %tr.headerrow
+      %th.logincol
+        = "Login"
+      %th.statuscol
+        = "Status"
+      - @resolutions.each do |r|
+        %th
+          = r
+      %th
+        = "Total"
+    - @rows.each do |row|
+      - rownum += 1
+      - cellcount = 0
+      - last_col = row.length - 1
+      - userrow = (row[0] != "") ? " usercell " : ""
+      - sumrow = (row[0] == "") && (row[1] == "") ? " sumcell " : ""
+      - if (row[0] != "")
+        - rownum = 1
+        - rowspan = row[1]
+        - row[1] = ""
+        %tr
+          %td{:class => "breakrow", :colspan => row.length}
+        - user += 1
+        - login = row[0]
+        - next
+      %tr
+        - row.each do |cell|
+          - cellclass = ""
+          - if cellcount == 0
+            - cellclass = " usercell "
+          - elsif (userrow != "") || (sumrow != "")
+            - cellclass = userrow + sumrow
+          - elsif cellcount == last_col
+            - cellclass = " sumcell "
+          - elsif (user%2 == 0) && (rownum%2 == 0)
+            - cellclass = " datacelloddone "
+          - elsif (user%2 == 0) && (rownum%2 != 0)
+            - cellclass = " datacellevenone "
+          - elsif (user%2 != 0) && (rownum%2 == 0)
+            - cellclass = " datacelloddtwo "
+          - elsif (user%2 != 0) && (rownum%2 != 0)
+            - cellclass = " datacelleventwo "
+          - cellcount += 1
+          - if rowspan > 1
+            %td{:class => cellclass, :rowspan => rowspan}
+              - rowspan = 1
+              = login
+          - elsif cellcount > 1
+            %td{:class => cellclass}
+              = cell
+          
+
+
+
+
+

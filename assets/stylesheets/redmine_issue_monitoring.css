@@ -75,3 +75,66 @@ div.mini_chart_note {
     margin: 0 auto;
     float: left;
 }
+
+table#active_issues_by_user {
+    text-align: center;
+    color: black;
+}
+
+table#active_issues_by_user th,
+table#active_issues_by_user td {
+    text-align: center;
+    color: black;
+    padding: 2px 1px;
+}
+
+table#active_issues_by_user tr.headerrow th {
+    background-color: #89A54E;
+    color: black;
+    font-weight: bold;
+}
+
+table#active_issues_by_user tr.headerrow th.logincol {
+    width: 100px;
+}
+
+table#active_issues_by_user tr.headerrow th.statuscol {
+    width: 100px;
+}
+
+table#active_issues_by_user tr td.breakrow {
+    height: .1em;
+}
+
+table#active_issues_by_user tr td.usercell {
+    background-color: #DB843D;
+}
+
+table#active_issues_by_user tr td.sumcell {
+    background-color: #AA4643;
+    color: white;
+}
+
+table#active_issues_by_user tr td.datacelloddone {
+    background-color: #80699b;
+}
+
+table#active_issues_by_user tr td.datacellevenone {
+    background-color: #B29BCD;
+}
+table#active_issues_by_user tr td.datacelloddtwo {
+    background-color: #3D96AE;
+}
+table#active_issues_by_user tr td.datacelleventwo {
+    background-color: #6EBFD7;
+}
+
+
+
+
+
+
+
+
+
+

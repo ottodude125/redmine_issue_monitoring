@@ -1,3 +1,6 @@
 = redmine_issue_monitoring
 
-Description goes here
+Please note that I have only used this in Redmine 2.5.0 and do not know if it will work in any other environment. 
+I must also note that this has been written with some parts catered to my specific environment. Certain pages may require
+an update/changes in order to make this plugin functional. One specific page is the "active by user". 
+This includes a table of resolutions which is a custom category that I have added to my issues. 
